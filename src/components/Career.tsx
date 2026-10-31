@@ -15,58 +15,49 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Co-Founder</h4>
-                <h5>CallHQ.ai</h5>
+                <h4>FreeLancer</h4>
+                <h5>Mezone Poudel</h5>
               </div>
               <h3>NOW</h3>
             </div>
             <p>
-              Building CallHQ.ai, a voice AI platform for
-              automating customer calls, support, and conversions.
+              Building Projects for Clients including UI/UX Designs, Android Apps, Designing and Developing Fully Functional Websites.
             </p>
           </div>
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Adobe</h4>
-                <h5>6+ years · Noida</h5>
+                <h4>Student</h4>
+                <h5>4+ years · Jhapa</h5>
               </div>
-              <h3>2017–24</h3>
+              <h3>2022–27</h3>
             </div>
             <p>
-              Senior Lead Software Engineer (Feb 2024 – May 2024). Lead Software
-              Engineer (Feb 2021 – Feb 2024). Software Engineer II (Dec 2017 –
-              Feb 2021): internationalization, globalization, and localization for
-              Adobe Technical Communication Suite; functional and linguistic testing
-              strategy; in-house tooling; collaboration with product and engineering
-              for high-quality localized releases.
+              Studied Computer Engineering Since 9th Grade, Participated and Won many Hackathons, Built Websites for Cliens At The Same Time.
             </p>
           </div>
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Consultant</h4>
-                <h5>Genpact Headstrong </h5>
+                <h4>Lorem</h4>
+                <h5>Lorem Ipsum</h5>
               </div>
-              <h3>2016–17</h3>
+              <h3>2000–00</h3>
             </div>
             <p>
-              Sep 2016 – Nov 2017. Developed and maintained WCF services consumed
-              by the UI; deployment support across environments; NUnit tests and
-              coverage; bug fixes from QA and users; database work.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint incidunt commodi illo cum aliquam ratione assumenda, unde corporis itaque velit optio distinctio iure ex, asperiores dolores quisquam quidem explicabo porro.
             </p>
           </div>
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Sf Engineer</h4>
-                <h5>Infogain</h5>
+                <h4>Lorem</h4>
+                <h5>Lorem Ipsum</h5>
               </div>
-              <h3>2013-16</h3>
+              <h3>2000-00</h3>
             </div>
             <p>
-              Software engineering across enterprise projects, contributing to
-              design, development, and delivery of business applications.
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero, id alias ipsa doloribus corrupti, corporis soluta quae consectetur ducimus minima, maxime sed neque error temporibus pariatur quasi repellat similique maiores.
             </p>
           </div>
         </div>
