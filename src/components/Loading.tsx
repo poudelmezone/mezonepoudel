@@ -7,7 +7,6 @@ import Marquee from "react-fast-marquee";
 const Loading = ({ percent }: { percent: number }) => {
   const { setIsLoading } = useLoading();
   const [loaded, setLoaded] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
@@ -16,7 +15,6 @@ const Loading = ({ percent }: { percent: number }) => {
       if (module.initialFX) {
         module.initialFX();
       }
-      setIsLoaded(true);
       setIsLoading(false);
     });
   }, []);
@@ -25,7 +23,6 @@ const Loading = ({ percent }: { percent: number }) => {
     setTimeout(() => {
       setLoaded(true);
       setTimeout(() => {
-        setIsLoaded(true);
       }, 1000);
     }, 600);
   }
