@@ -10,13 +10,37 @@ const Loading = ({ percent }: { percent: number }) => {
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
-    import("./utils/initialFX").then((module) => {
-      setClicked(true);
-      if (module.initialFX) {
+    let isMounted = true;
+
+    const startSite = async () => {
+      try {
+        const module = await import("./utils/initialFX");
         module.initialFX();
+      } catch (error) {
+        // The intro is decorative; it must never prevent the site from opening.
+        console.error("Could not start the intro animation:", error);
+        document.body.style.overflowY = "auto";
+        document.querySelector("main")?.classList.add("main-active");
+        document
+          .querySelectorAll<HTMLElement>(
+            ".landing-intro h1, .landing-intro h2, .landing-info h2, .header, .icons-section, .nav-fade"
+          )
+          .forEach((element) => {
+            element.style.opacity = "1";
+            element.style.transform = "none";
+          });
+      } finally {
+        if (isMounted) {
+          setClicked(true);
+          setIsLoading(false);
+        }
       }
-      setIsLoading(false);
-    });
+    };
+
+    void startSite();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   if (percent >= 100) {
