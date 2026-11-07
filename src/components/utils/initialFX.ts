@@ -4,7 +4,7 @@ import { smoother } from "../Navbar";
 
 export function initialFX() {
   document.body.style.overflowY = "auto";
-  smoother.paused(false);
+  smoother?.paused(false);
   document.getElementsByTagName("main")[0].classList.add("main-active");
   gsap.to("body", {
     backgroundColor: "#0a0e17",
@@ -81,56 +81,34 @@ export function initialFX() {
 }
 
 function LoopText(Text1: SplitText, Text2: SplitText) {
-  var tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
-  const delay = 4;
-  const delay2 = delay * 2 + 1;
+  const duration = 0.8;
+  const options = {
+    opacity: 1,
+    y: 0,
+    duration,
+    stagger: 0.04,
+    ease: "power3.inOut",
+  };
 
-  tl.fromTo(
-    Text2.chars,
-    { opacity: 0, y: 80 },
-    {
-      opacity: 1,
-      duration: 1.2,
+  gsap.set(Text1.chars, { opacity: 1, y: 0 });
+  gsap.set(Text2.chars, { opacity: 0, y: 36 });
+
+  gsap
+    .timeline({ repeat: -1, repeatDelay: 1 })
+    .to(Text1.chars, {
+      opacity: 0,
+      y: -36,
+      duration,
+      stagger: 0.04,
       ease: "power3.inOut",
-      y: 0,
-      stagger: 0.1,
-      delay: delay,
-    },
-    0
-  )
-    .fromTo(
-      Text1.chars,
-      { y: 80 },
-      {
-        duration: 1.2,
-        ease: "power3.inOut",
-        y: 0,
-        stagger: 0.1,
-        delay: delay2,
-      },
-      1
-    )
-    .fromTo(
-      Text1.chars,
-      { y: 0 },
-      {
-        y: -80,
-        duration: 1.2,
-        ease: "power3.inOut",
-        stagger: 0.1,
-        delay: delay,
-      },
-      0
-    )
-    .to(
-      Text2.chars,
-      {
-        y: -80,
-        duration: 1.2,
-        ease: "power3.inOut",
-        stagger: 0.1,
-        delay: delay2,
-      },
-      1
-    );
+    }, 3)
+    .to(Text2.chars, options, 3)
+    .to(Text2.chars, {
+      opacity: 0,
+      y: -36,
+      duration,
+      stagger: 0.04,
+      ease: "power3.inOut",
+    }, 7)
+    .to(Text1.chars, options, 7);
 }

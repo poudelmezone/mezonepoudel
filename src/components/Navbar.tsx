@@ -10,6 +10,7 @@ export let smoother: ScrollSmoother;
 
 const Navbar = () => {
   useEffect(() => {
+    smoother?.kill();
     smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
@@ -21,23 +22,34 @@ const Navbar = () => {
     });
 
     smoother.scrollTop(0);
-    smoother.paused(true);
-
     let links = document.querySelectorAll(".header ul a");
+    const clickHandlers = new Map<HTMLAnchorElement, (event: MouseEvent) => void>();
     links.forEach((elem) => {
       let element = elem as HTMLAnchorElement;
-      element.addEventListener("click", (e) => {
+      const handleClick = (e: MouseEvent) => {
         if (window.innerWidth > 1024) {
           e.preventDefault();
           let elem = e.currentTarget as HTMLAnchorElement;
           let section = elem.getAttribute("data-href");
-          smoother.scrollTo(section, true, "top top");
+          if (section) smoother.scrollTo(section, true, "top top");
         }
-      });
+      };
+      clickHandlers.set(element, handleClick);
+      element.addEventListener("click", handleClick);
     });
-    window.addEventListener("resize", () => {
+
+    const handleResize = () => {
       ScrollSmoother.refresh(true);
-    });
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clickHandlers.forEach((handler, element) => {
+        element.removeEventListener("click", handler);
+      });
+      window.removeEventListener("resize", handleResize);
+      smoother?.kill();
+    };
   }, []);
   return (
     <>

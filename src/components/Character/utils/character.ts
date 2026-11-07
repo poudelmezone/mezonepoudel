@@ -4,8 +4,6 @@ import { setCharTimeline, setAllTimeline } from "../../utils/GsapScroll";
 import { decryptFile } from "./decrypt";
 
 const setCharacter = (
-  renderer: THREE.WebGLRenderer,
-  scene: THREE.Scene,
   camera: THREE.PerspectiveCamera
 ) => {
   const loader = new GLTFLoader();
@@ -21,13 +19,10 @@ const setCharacter = (
           "MyCharacter12"
         );
         const blobUrl = URL.createObjectURL(new Blob([encryptedBlob]));
-
-        let character: THREE.Object3D;
         loader.load(
           blobUrl,
-          async (gltf) => {
-            character = gltf.scene;
-            await renderer.compileAsync(character, camera, scene);
+          (gltf) => {
+            const character = gltf.scene;
             character.traverse((child: any) => {
               if (child.isMesh) {
                 const mesh = child as THREE.Mesh;
@@ -53,16 +48,21 @@ const setCharacter = (
             resolve(gltf);
             setCharTimeline(character, camera);
             setAllTimeline();
-            character!.getObjectByName("footR")!.position.y = 3.36;
-            character!.getObjectByName("footL")!.position.y = 3.36;
+            const rightFoot = character.getObjectByName("footR");
+            const leftFoot = character.getObjectByName("footL");
+            if (rightFoot) rightFoot.position.y = 3.36;
+            if (leftFoot) leftFoot.position.y = 3.36;
 
             // Monitor scale is handled by GsapScroll.ts animations
 
             dracoLoader.dispose();
+            URL.revokeObjectURL(blobUrl);
           },
           undefined,
           (error) => {
             console.error("Error loading GLTF model:", error);
+            URL.revokeObjectURL(blobUrl);
+            dracoLoader.dispose();
             reject(error);
           }
         );
